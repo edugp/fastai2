@@ -102,7 +102,7 @@ class ReduceLROnPlateau(TrackerCallback):
             self.wait += 1
             if self.wait >= self.patience:
                 old_lr = self.opt.hypers[-1]["lr"]
-                for h in self.opt.hypers: h['lr'] /= self.factor if h['lr'] > self.min_lr else 1
+                for h in self.opt.hypers: h['lr'] = max(h['lr'] / self.factor, self.min_lr)
                 self.wait = 0
                 if self.opt.hypers[-1]["lr"] < old_lr:
                     print(f'Epoch {self.epoch}: reducing lr to {self.opt.hypers[-1]["lr"]}')
