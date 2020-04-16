@@ -101,7 +101,7 @@ class ReduceLROnPlateau(TrackerCallback):
         else:
             self.wait += 1
             if self.wait >= self.patience:
-                old_lr = self.opt.hypers[-1]["lr"]
+                old_lr = self.opt.hypers[-1]['lr']
                 for h in self.opt.hypers: h['lr'] = max(h['lr'] / self.factor, self.min_lr)
                 self.wait = 0
                 if self.opt.hypers[-1]["lr"] < old_lr:
